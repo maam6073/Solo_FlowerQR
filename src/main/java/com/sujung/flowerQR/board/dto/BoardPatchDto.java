@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 
 @Getter
@@ -14,9 +15,11 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class BoardPatchDto {
 
-    @NotBlank
-    private String content;
+    private Long boardId;
+
+    @NotNull
+    private int content_pw;
 
     @NotBlank
-    private int content_pw;
+    private String content;
 }

@@ -1,30 +1,30 @@
 package com.sujung.flowerQR.board.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.sujung.flowerQR.common.BaseEntity;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@NoArgsConstructor
-public class Board {
+public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
 
-    @Column(nullable = false)
+    @Column
+    private String nickname;
+
+    @Column
     private String title;
 
     @Column
     private String content;
 
     @Column
-    @Getter
     private int content_pw;
 
     @Column

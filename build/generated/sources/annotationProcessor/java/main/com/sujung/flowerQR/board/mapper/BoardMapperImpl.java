@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-12T17:31:18+0900",
+    date = "2023-11-16T13:21:56+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 11.0.20 (Azul Systems, Inc.)"
 )
 @Component
@@ -23,6 +23,7 @@ public class BoardMapperImpl implements BoardMapper {
 
         Board.BoardBuilder board = Board.builder();
 
+        board.nickname( boardPostDto.getNickname() );
         board.title( boardPostDto.getTitle() );
         board.content( boardPostDto.getContent() );
         board.content_pw( boardPostDto.getContent_pw() );
@@ -37,6 +38,9 @@ public class BoardMapperImpl implements BoardMapper {
         }
 
         Board.BoardBuilder board = Board.builder();
+
+        board.content( boardPatchDto.getContent() );
+        board.content_pw( boardPatchDto.getContent_pw() );
 
         return board.build();
     }
@@ -66,6 +70,7 @@ public class BoardMapperImpl implements BoardMapper {
 
         BoardResponseDto.PatchResponse.PatchResponseBuilder patchResponse = BoardResponseDto.PatchResponse.builder();
 
+        patchResponse.nickname( board.getNickname() );
         patchResponse.title( board.getTitle() );
         patchResponse.content( board.getContent() );
 

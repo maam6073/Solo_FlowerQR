@@ -16,14 +16,13 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping(value = "/board")
+@RequestMapping(value = "/boards")
 @Validated
 public class BoardController {
     private final BoardMapper boardMapper;
     private final BoardService boardService;
 
     BoardController(BoardMapper boardMapper, BoardService boardService){
-
         this.boardMapper = boardMapper;
         this.boardService = boardService;
     }
@@ -36,10 +35,13 @@ public class BoardController {
     }
 
     //글 수정
-    @PatchMapping
-    public ResponseEntity patchBoard(@Valid @RequestBody BoardPatchDto boardPatchDto){
+    @PatchMapping("/{board-id}")
+    public ResponseEntity patchBoard(@PathVariable("board-id") @Positive Long boardId,
+                                         @Valid @RequestBody BoardPatchDto boardPatchDto){
         Board board;
         BoardResponseDto.PatchResponse response;
+        boardPatchDto.setBoardId(boardId);
+
         if(boardService.alterBoard(boardMapper.boardPatchDtoToBoard(boardPatchDto)) != null){
             board = boardService.alterBoard(boardMapper.boardPatchDtoToBoard(boardPatchDto));
             response = boardMapper.boardToPatchResponse(board);
