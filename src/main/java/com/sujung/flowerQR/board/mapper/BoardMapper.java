@@ -1,6 +1,7 @@
 package com.sujung.flowerQR.board.mapper;
 
 
+import com.sujung.flowerQR.board.dto.BoardDeleteDto;
 import com.sujung.flowerQR.board.dto.BoardPatchDto;
 import com.sujung.flowerQR.board.dto.BoardPostDto;
 import com.sujung.flowerQR.board.dto.BoardResponseDto;
@@ -10,10 +11,12 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface BoardMapper {
+
     Board boardPostDtoToBoard(BoardPostDto boardPostDto);
 
     Board boardPatchDtoToBoard(BoardPatchDto boardPatchDto);
 
+    Board boardDeleteDtoToBoard(BoardDeleteDto boardDeleteDto);
     BoardResponseDto.ContentResponse boardToContentResponseDto(Board board);
     //BoardResponseDto.SimpleContentsResponse boardToSimpleContentsResponse(Board board);
     BoardResponseDto.PatchResponse boardToPatchResponse(Board board);

@@ -8,9 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Locale;
 
 
 @Service
+@Transactional
 public class BoardService {
 
     private final BoardRepository boardRepository;
@@ -26,11 +30,10 @@ public class BoardService {
 
     //글 수정
     public Board alterBoard(Board board){
-        Board updateBoard;
+        Board updateBoard = findBoardById(board.getBoardId());
+
         if(verifyBoardPassword(board)){
-            updateBoard = Board.builder()
-                    .content(board.getContent())
-                    .build();
+            updateBoard.setContent(board.getContent());
         }
         else
             return null;
@@ -38,7 +41,17 @@ public class BoardService {
         return boardRepository.save(updateBoard);
     }
 
+    //글 삭제
+    public void dropBoard(Board board){
+        Board delBoard = findBoardById(board.getBoardId());
+        if(verifyBoardPassword(board))
+            boardRepository.delete(delBoard);
+        else
+            throw new BusinessLogicException(ExceptionCode.NO_PERMISSION);
+    }
+
     //글 찾기
+    @Transactional(readOnly = true)
     public Board findBoardById(Long boardId){
         return boardRepository.findById(boardId)
                 .orElseThrow(() -> new BusinessLogicException(ExceptionCode.BOARD_NOT_FOUND));

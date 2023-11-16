@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Flower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long flowerId;
+    private Long flowerId;
 
     @Column
     private String name;

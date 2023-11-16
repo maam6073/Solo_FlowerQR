@@ -1,5 +1,6 @@
 package com.sujung.flowerQR.board.mapper;
 
+import com.sujung.flowerQR.board.dto.BoardDeleteDto;
 import com.sujung.flowerQR.board.dto.BoardPatchDto;
 import com.sujung.flowerQR.board.dto.BoardPostDto;
 import com.sujung.flowerQR.board.dto.BoardResponseDto;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-16T13:21:56+0900",
+    date = "2023-11-16T15:35:22+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.4.jar, environment: Java 11.0.20 (Azul Systems, Inc.)"
 )
 @Component
@@ -39,8 +40,23 @@ public class BoardMapperImpl implements BoardMapper {
 
         Board.BoardBuilder board = Board.builder();
 
+        board.boardId( boardPatchDto.getBoardId() );
         board.content( boardPatchDto.getContent() );
         board.content_pw( boardPatchDto.getContent_pw() );
+
+        return board.build();
+    }
+
+    @Override
+    public Board boardDeleteDtoToBoard(BoardDeleteDto boardDeleteDto) {
+        if ( boardDeleteDto == null ) {
+            return null;
+        }
+
+        Board.BoardBuilder board = Board.builder();
+
+        board.boardId( boardDeleteDto.getBoardId() );
+        board.content_pw( boardDeleteDto.getContent_pw() );
 
         return board.build();
     }

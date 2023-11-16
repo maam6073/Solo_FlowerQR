@@ -22,6 +22,7 @@ public class Board extends BaseEntity {
     private String title;
 
     @Column
+    @Setter
     private String content;
 
     @Column

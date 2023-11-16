@@ -1,5 +1,6 @@
 package com.sujung.flowerQR.board.controller;
 
+import com.sujung.flowerQR.board.dto.BoardDeleteDto;
 import com.sujung.flowerQR.board.dto.BoardPatchDto;
 import com.sujung.flowerQR.board.dto.BoardPostDto;
 import com.sujung.flowerQR.board.dto.BoardResponseDto;
@@ -60,6 +61,16 @@ public class BoardController {
         Board board = boardService.findBoardById(boardId);
         BoardResponseDto.ContentResponse response = boardMapper.boardToContentResponseDto(board);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
+    //글 삭제
+    @DeleteMapping("/{board-id}")
+    public ResponseEntity deleteBoard(@PathVariable("board-id") @Positive Long boardId,
+                                      @Valid @RequestBody BoardDeleteDto boardDeleteDto){
+        boardDeleteDto.setBoardId(boardId);
+        boardService.dropBoard(boardMapper.boardDeleteDtoToBoard(boardDeleteDto));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
