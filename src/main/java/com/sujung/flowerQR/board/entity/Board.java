@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class Board extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "board_id")
     private Long boardId;
 
     @Column

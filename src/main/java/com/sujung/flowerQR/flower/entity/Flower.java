@@ -1,23 +1,30 @@
 package com.sujung.flowerQR.flower.entity;
 
 
+import com.sujung.flowerQR.common.BaseEntity;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
-public class Flower {
+@Builder @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Flower extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long flowerId;
+    @Column(name = "flower_id")
+    private Long flower_id;
 
-    @Column
+    @Column(name = "name", unique = true)
     private String name;
 
-    @Column
+    @Column(name = "sub_name")
     private String sub_name;
 
-    @Column
+    @Column(name = "content")
     private String content;
 
-    @Column
+    @Column(name = "sunlight_content")
     private String sunlight_content;
 }
